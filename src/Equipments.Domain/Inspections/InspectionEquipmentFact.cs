@@ -15,7 +15,7 @@ namespace Equipments.Domain.Inspections
         /// <summary>
         /// Краткий комментарий
         /// </summary>
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         /// <summary>
         /// ИД Состояния оргтехники

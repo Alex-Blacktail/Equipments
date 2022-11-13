@@ -15,6 +15,16 @@ namespace Equipments.Domain.Components
         public int Id { get; set; }
 
         /// <summary>
+        /// Наименование модели
+        /// </summary>
+        public string ModelName { get; set; }
+
+        /// <summary>
+        /// Номер модели
+        /// </summary>
+        public string ModelNumber { get; set; }
+
+        /// <summary>
         /// Инвентарный номер
         /// </summary>
         public string InventoryNumber { get; set; }
@@ -48,6 +58,10 @@ namespace Equipments.Domain.Components
         public virtual Equipment Equipment { get; set; }
 
         public virtual IEnumerable<ComponentProperty> ComponentProperties { get; set; }
+
+        /// <summary>
+        /// Связь один-к-одному
+        /// </summary>
         public virtual ComponentState ComponentState { get; set; }
     }
 }

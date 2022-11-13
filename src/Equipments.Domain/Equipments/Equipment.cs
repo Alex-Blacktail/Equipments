@@ -15,19 +15,19 @@ namespace Equipments.Domain.Equipments
         public int Id { get; set; }
 
         /// <summary>
-        /// Наименование (
+        /// Наименование модели
         /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Инвентарный номер
-        /// </summary>
-        public string InventoryNumber { get; set; }
+        public string ModelName { get; set; }
 
         /// <summary>
         /// Номер модели
         /// </summary>
         public string ModelNumber { get; set; }
+
+        /// <summary>
+        /// Инвентарный номер
+        /// </summary>
+        public string InventoryNumber { get; set; }
 
         /// <summary>
         /// Дата производства

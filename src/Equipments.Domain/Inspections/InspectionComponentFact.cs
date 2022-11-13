@@ -11,11 +11,6 @@
         public int Id { get; set; }
 
         /// <summary>
-        /// Краткий комментарий
-        /// </summary>
-        public string ShortComment { get; set; }
-
-        /// <summary>
         /// ИД Состояния комплектующего
         /// </summary>
         public int ComponentStateId { get; set; }
