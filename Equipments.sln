@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equipments.Web.Client", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equipments.Web.Shared", "src\Equipments.Web\Shared\Equipments.Web.Shared.csproj", "{7ABC75E7-DE3B-4873-86BB-E3BE76B93209}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equipments.Infrastructure", "src\Equipments.Infrastructure\Equipments.Infrastructure.csproj", "{228F9545-2F1E-452C-BD3E-7C9656D83940}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equipments.Infrastructure", "src\Equipments.Infrastructure\Equipments.Infrastructure.csproj", "{228F9545-2F1E-452C-BD3E-7C9656D83940}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

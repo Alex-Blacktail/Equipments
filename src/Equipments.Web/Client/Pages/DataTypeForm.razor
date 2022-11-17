@@ -1,0 +1,36 @@
+﻿@page "/DataTypes"
+@using System.Linq
+@using Equipments.Domain;
+
+@inject DialogService DialogService
+@inject HttpClient httpClient
+
+<RadzenDataGrid @ref="dataTypesGrid" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" Data="@dataTypes" TItem="DataType">
+    <Columns>
+        <RadzenDataGridColumn 
+            Width="50px" 
+            TItem="DataType" 
+            Title="#" 
+            Filterable="false" 
+            Sortable="false" 
+            TextAlign="TextAlign.Center">
+
+            <Template Context="data">
+                @(dataTypes.IndexOf(data) + 1)
+            </Template>
+        </RadzenDataGridColumn>
+
+        <RadzenDataGridColumn TItem="DataType" Property="Name" Title="Наименование FormatString="{0:d}" />
+        <RadzenDataGridColumn TItem="DataType" Property="CodeName" Title="Наименование FormatString="{0:d}" />
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    private RadzenDataGrid<DataType> dataTypesGrid;
+    private IList<DataType>? dataTypes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        dataTypes = await httpClient.GetFromJsonAsync<DataType[]>("DataTypes");
+    }
+}
