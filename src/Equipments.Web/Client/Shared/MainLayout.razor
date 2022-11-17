@@ -6,6 +6,7 @@
 <RadzenContextMenu />
 
 <RadzenLayout>
+
     <RadzenHeader>
         <div class="row justify-content-start align-items-center">
             <div class="col-6 d-flex align-items-center">
@@ -18,18 +19,22 @@
             </div>
         </div>
     </RadzenHeader>
+
     <RadzenBody Expanded="@sidebarExpanded">
         <RadzenContentContainer Name="main">
         @Body
         </RadzenContentContainer>
     </RadzenBody>
+
     <RadzenSidebar Expanded="@sidebarExpanded">
         <RadzenPanelMenu style="height: 100%">
             <RadzenPanelMenuItem Text="Домой" Path="/" />
         </RadzenPanelMenu>
     </RadzenSidebar>
+
     <RadzenFooter>
         <RadzenLabel Text="Лёха, Copyright Ⓒ 2022">
         </RadzenLabel>
     </RadzenFooter>
+
 </RadzenLayout>
