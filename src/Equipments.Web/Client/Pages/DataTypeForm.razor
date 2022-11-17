@@ -5,6 +5,11 @@
 @inject DialogService DialogService
 @inject HttpClient httpClient
 
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Редактировать блять эту хуету?</RadzenText>
+    <RadzenButton Text="ТЕКСТ БЛЯТЬ ТЕКСТ ЗДЕСЬ БЛЯТЬ" Style="width: 100%;" ButtonStyle="ButtonStyle.Secondary" Click=@ShowInlineDialog />
+</RadzenCard>
+
 <RadzenDataGrid @ref="dataTypesGrid" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" Data="@dataTypes" TItem="DataType">
     <Columns>
         <RadzenDataGridColumn 
@@ -24,7 +29,6 @@
         <RadzenDataGridColumn TItem="DataType" Property="CodeName" Title="Наименование FormatString="{0:d}" />
     </Columns>
 </RadzenDataGrid>
-
 @code {
     private RadzenDataGrid<DataType> dataTypesGrid;
     private IList<DataType>? dataTypes;
@@ -32,5 +36,20 @@
     protected override async Task OnInitializedAsync()
     {
         dataTypes = await httpClient.GetFromJsonAsync<DataType[]>("DataTypes");
+    }
+
+    async Task ShowInlineDialog()
+    {
+        var result = await DialogService.OpenAsync("Simple Dialog", ds =>
+        @<div>
+                <p class="mb-4">Редактировать блять это? <b>Номер это</b>?</p>
+                <div class="row">
+                    <div class="col">
+                        <RadzenButton Text="Ok" Click="() => ds.Close(true)" Class="me-1" Style="width: 80px;" />
+                        <RadzenButton Text="Cancel" Click="() => ds.Close(false)" ButtonStyle="ButtonStyle.Light" Class="me-1" />
+                    </div>
+                </div>
+        </div>);
+
     }
 }
