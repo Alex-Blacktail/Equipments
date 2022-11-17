@@ -33,6 +33,7 @@ namespace Equipments.Infrastructure
         public EquipmentsDbContext(DbContextOptions<EquipmentsDbContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -139,7 +140,8 @@ namespace Equipments.Infrastructure
                 entity
                     .HasOne(e => e.Component)
                     .WithMany(e => e.ComponentProperties)
-                    .HasForeignKey(e => e.ComponentId);
+                    .HasForeignKey(e => e.ComponentId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             builder.Entity<Component>(entity =>
@@ -193,7 +195,8 @@ namespace Equipments.Infrastructure
                 entity
                     .HasOne(e => e.EquipmentTypeProperty)
                     .WithMany(e => e.EquipmentProperties)
-                    .HasForeignKey(e => e.EquipmentTypePropertyId);
+                    .HasForeignKey(e => e.EquipmentTypePropertyId)
+                    .OnDelete(DeleteBehavior.Restrict);
                 entity
                    .HasOne(e => e.Equipment)
                    .WithMany(e => e.EquipmentProperties)
@@ -256,7 +259,8 @@ namespace Equipments.Infrastructure
                 entity
                     .HasOne(e => e.InspectionEquipmentFact)
                     .WithMany(e => e.InspectionComponentFacts)
-                    .HasForeignKey(e => e.InspectionEquipmentFactId);
+                    .HasForeignKey(e => e.InspectionEquipmentFactId)
+                    .OnDelete(DeleteBehavior.Restrict);
                 entity
                     .HasOne(e => e.ComponentState)
                     .WithMany(e => e.InspectionComponentFacts)
