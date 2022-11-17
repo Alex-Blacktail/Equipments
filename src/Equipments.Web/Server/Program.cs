@@ -1,3 +1,4 @@
+using Equipments.Infrastructure;
 using Equipments.Web.Server.Data;
 using Equipments.Web.Server.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -6,9 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("Security");
+var securityConnectionString = builder.Configuration.GetConnectionString("Security");
+var equipmentConnectionString = builder.Configuration.GetConnectionString("Equipments");
 
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<EquipmentsDbContext>(options => options.UseSqlServer(securityConnectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(equipmentConnectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services
