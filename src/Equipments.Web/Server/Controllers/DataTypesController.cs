@@ -23,11 +23,11 @@ namespace Equipments.Web.Server.Controllers
             return dataTypes;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add()
-        {
-            var dataTypes = await _context.DataTypes.ToListAsync();
-            return Ok();
-        }
+        //[HttpPost]
+        //public async Task<IActionResult> Add()
+        //{
+        //    var dataTypes = await _context.DataTypes.ToListAsync();
+        //    return Ok();
+        //}
     }
 }

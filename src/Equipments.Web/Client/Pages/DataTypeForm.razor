@@ -6,8 +6,8 @@
 @inject HttpClient httpClient
 
 <RadzenCard>
-    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Редактировать блять эту хуету?</RadzenText>
-    <RadzenButton Text="ТЕКСТ БЛЯТЬ ТЕКСТ ЗДЕСЬ БЛЯТЬ" Style="width: 100%;" ButtonStyle="ButtonStyle.Secondary" Click=@ShowInlineDialog />
+    <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Добавить</RadzenText>
+    <RadzenButton Text="ТЕКСТ БЛЯТЬ ТЕКСТ ЗДЕСЬ БЛЯТЬ" Style="width: 50%;" ButtonStyle="ButtonStyle.Secondary" Click=@ShowInlineDialog />
 </RadzenCard>
 
 <RadzenDataGrid @ref="dataTypesGrid" AllowFiltering="true" AllowPaging="true" PageSize="5" AllowSorting="true" Data="@dataTypes" TItem="DataType">
@@ -40,16 +40,7 @@
 
     async Task ShowInlineDialog()
     {
-        var result = await DialogService.OpenAsync("Simple Dialog", ds =>
-        @<div>
-                <p class="mb-4">Редактировать блять это? <b>Номер это</b>?</p>
-                <div class="row">
-                    <div class="col">
-                        <RadzenButton Text="Ok" Click="() => ds.Close(true)" Class="me-1" Style="width: 80px;" />
-                        <RadzenButton Text="Cancel" Click="() => ds.Close(false)" ButtonStyle="ButtonStyle.Light" Class="me-1" />
-                    </div>
-                </div>
-        </div>);
+        var result = await DialogService.OpenAsync("Добавить", ds => @<Equipments.Web.Client.Components.DataTypes.AddDataTypeComponent/>);
 
     }
 }
