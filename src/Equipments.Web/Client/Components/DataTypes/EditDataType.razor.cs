@@ -4,6 +4,7 @@ using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Net.Http.Json;
+using Equipments.Web.Shared;
 
 namespace Equipments.Web.Client.Components.DataTypes
 {
@@ -27,26 +28,26 @@ namespace Equipments.Web.Client.Components.DataTypes
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-        //[Inject]
-        //public EquipmentsService EquipmentsService { get; set; }
-
         [Parameter]
         public int Id { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            dataType = await httpClient.GetFromJsonAsync<DataType>("DataTypes");
+            var dataType = await httpClient.GetFromJsonAsync<DataType>("DataTypes/" + Id);
+
+            dataTypeDto.Name = dataType.Name;
+            dataTypeDto.CodeName = dataType.CodeName;
         }
 
+        protected DataTypeDto dataTypeDto = new();
         protected bool errorVisible;
-        protected DataType dataType;
 
         protected async Task FormSubmit()
         {
             try
             {
-                await httpClient.PutAsJsonAsync("DataTypes", dataType);
-                DialogService.Close(dataType);
+                await httpClient.PutAsJsonAsync("DataTypes/" + Id, dataTypeDto);
+                DialogService.Close(dataTypeDto);
             }
             catch (Exception ex)
             {

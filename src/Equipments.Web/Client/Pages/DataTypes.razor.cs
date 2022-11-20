@@ -1,12 +1,12 @@
+using Radzen;
+using Radzen.Blazor;
+using System.Net.Http.Json;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Radzen;
-using Radzen.Blazor;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Equipments.Domain;
 using Equipments.Web.Client.Components.DataTypes;
-using System.Net.Http;
-using System.Net.Http.Json;
 
 namespace Equipments.Web.Client.Pages
 {
@@ -30,9 +30,6 @@ namespace Equipments.Web.Client.Pages
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-        //[Inject]
-        //public EquipmentsService EquipmentsService { get; set; }
-
         protected IEnumerable<DataType> dataTypes;
 
         protected RadzenDataGrid<DataType> grid0;
@@ -42,15 +39,14 @@ namespace Equipments.Web.Client.Pages
         {
             try
             {
-                dataTypes = await httpClient.GetFromJsonAsync<DataType[]>("DataTypes");
-
-                //var result = await EquipmentsService.GetDataTypes(filter: $"{args.Filter}", orderby: $"{args.OrderBy}", top: args.Top, skip: args.Skip, count:args.Top != null && args.Skip != null);
-                //dataTypes = result.Value.AsODataEnumerable();
-                //count = result.Count;
-
+                dataTypes = await httpClient.GetFromJsonAsync<DataType[]>("DataTypes");        
                 count = dataTypes.Count();
             }
-            catch (System.Exception ex)
+            catch (AccessTokenNotAvailableException exception)
+            {
+                exception.Redirect();
+            }
+            catch (Exception ex)
             {
                 NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error, Summary = $"Error", Detail = $"Unable to load DataTypes" });
             }
@@ -64,7 +60,7 @@ namespace Equipments.Web.Client.Pages
 
         protected async Task EditRow(DataType args)
         {
-            await DialogService.OpenAsync<EditDataType>("Edit DataType", new Dictionary<string, object> { {"Id", args.Id} });
+            await DialogService.OpenAsync<EditDataType>("Edit DataType", new Dictionary<string, object> { {"id", args.Id} });
             await grid0.Reload();
         }
 

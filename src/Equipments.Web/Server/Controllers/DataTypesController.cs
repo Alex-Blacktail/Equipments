@@ -18,10 +18,9 @@ namespace Equipments.Web.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<DataType>> GetDataTypes() 
+        public async Task<IEnumerable<DataType>> Get() 
         {
             var dataTypes = await _context.DataTypes
-                .AsNoTracking()
                 .ToListAsync();
 
             return dataTypes;
@@ -31,8 +30,8 @@ namespace Equipments.Web.Server.Controllers
         public async Task<DataType> GetDataType(int id)
         {
             var item = await _context.DataTypes
-                .AsNoTracking()
                 .FirstOrDefaultAsync(i => i.Id == id);
+
             return item;
         }
 
@@ -51,15 +50,22 @@ namespace Equipments.Web.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDataType(int id, DataType item)
+        public async Task<IActionResult> PutDataType(int id, DataTypeDto item)
         {
-            if (item == null || (item.Id != id))
+            var dataType = await _context.DataTypes.FirstOrDefaultAsync(i => i.Id == id);
+
+            if (item == null || dataType == null)
             {
                 return BadRequest();
             }
+            
+            dataType.Name = item.Name;
+            dataType.CodeName = item.CodeName;
 
-            _context.DataTypes.Update(item);
+            _context.DataTypes.Update(dataType);
+
             await _context.SaveChangesAsync();
+
             return Ok();
         }
 

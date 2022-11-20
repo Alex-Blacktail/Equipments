@@ -15,7 +15,8 @@
 <div class="row">
     <div class="col-md-12">
         <RadzenDataGrid @ref="grid0"  AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true"
-            Data="@dataTypes" Count=count LoadData=@Grid0LoadData  TItem="DataType" RowSelect="@EditRow" >
+            Data="@dataTypes" Count=count LoadData=@Grid0LoadData TItem="DataType" RowSelect="@EditRow">
+
             <Columns>
                 <RadzenDataGridColumn TItem="DataType" Property="Name" Title="Name">
                 </RadzenDataGridColumn>
@@ -29,6 +30,7 @@
                     </Template>
                 </RadzenDataGridColumn>
             </Columns>
+
         </RadzenDataGrid>
     </div>
 </div>

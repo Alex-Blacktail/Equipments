@@ -2,9 +2,7 @@ using Equipments.Infrastructure;
 using Equipments.Web.Server.Data;
 using Equipments.Web.Server.Models;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,18 +10,11 @@ var securityConnectionString = builder.Configuration.GetConnectionString("Securi
 var equipmentConnectionString = builder.Configuration.GetConnectionString("Equipments");
 
 builder.Services.AddDbContext<EquipmentsDbContext>(options => options.UseSqlServer(securityConnectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(equipmentConnectionString));
 
 builder.Services
     .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(equipmentConnectionString));
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-//builder.Services
-//    .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services
     .AddIdentityServer()
@@ -32,6 +23,8 @@ builder.Services
 builder.Services
     .AddAuthentication()
     .AddIdentityServerJwt();
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
