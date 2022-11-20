@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class ApiController : ControllerBase
+public abstract class ApiController : ControllerBase
 {
     protected readonly EquipmentsDbContext _context;
 
