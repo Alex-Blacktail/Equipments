@@ -6,21 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Equipments.Web.Server.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class DataTypesController : ControllerBase
+    public class DataTypesController : ApiController
     {
-        private readonly EquipmentsDbContext _context;
-
-        public DataTypesController(EquipmentsDbContext context) 
+        public DataTypesController(EquipmentsDbContext context) : base(context)
         {
-            _context = context;
         }
 
         [HttpGet]
         public async Task<IEnumerable<DataType>> Get() 
         {
             var dataTypes = await _context.DataTypes
+                .AsNoTracking()
                 .ToListAsync();
 
             return dataTypes;
@@ -30,6 +26,7 @@ namespace Equipments.Web.Server.Controllers
         public async Task<DataType> GetDataType(int id)
         {
             var item = await _context.DataTypes
+                .AsNoTracking()
                 .FirstOrDefaultAsync(i => i.Id == id);
 
             return item;
@@ -82,7 +79,5 @@ namespace Equipments.Web.Server.Controllers
 
             return Ok();
         }
-
-
     }
 }
