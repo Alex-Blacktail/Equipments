@@ -1,4 +1,4 @@
-﻿namespace Equipments.Web.Shared
+﻿namespace Equipments.Web.Client.Models
 {
     public class DataTypeDto
     {
