@@ -1,0 +1,28 @@
+@page "/edit-inspection-type"
+
+@inject HttpClient httpClient
+
+@using Equipments.Web.Client.Models;
+
+<PageTitle>Редактировать вид осмотра</PageTitle>
+    <div class="col-md-12">
+    <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Невозможно сохранить</RadzenAlert>
+    <RadzenTemplateForm TItem="SomeTypeDto" Data="@typeDto" Visible="@(typeDto != null)" Submit="@FormSubmit">
+            <div style="margin-bottom: 1rem" class="row">
+                <div class="col-md-3">
+                <RadzenLabel Text="Name" Component="Наименование" style="width: 100%" />
+                </div>
+                <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@typeDto.Name" Name="Наименование" />
+                <RadzenRequiredValidator Component="Наименование" Text="Необходимо наименование!" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-end" style="margin-top: 1rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Сохранить" Style="margin-right: 0.5rem" Variant="Variant.Flat"/>
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Отмена" Variant="Variant.Flat" Click="@CancelButtonClick"  />
+                </div>
+            </div>
+        </RadzenTemplateForm>
+    </div>
+

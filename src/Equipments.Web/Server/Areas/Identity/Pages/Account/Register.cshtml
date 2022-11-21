@@ -1,9 +1,12 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Регистрация";
 }
 
+
+@if (User.Identity.IsAuthenticated)
+{
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
@@ -39,8 +42,10 @@
                 {
                     <div>
                         <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                article
+                                about setting up this ASP.NET application to support logging in via external services
+                            </a>.
                         </p>
                     </div>
                 }
@@ -61,6 +66,12 @@
         </section>
     </div>
 </div>
+
+}
+else
+{
+    <p>Недостаточна прав для совершения данного действия.</p>
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
