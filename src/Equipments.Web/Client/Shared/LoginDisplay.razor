@@ -5,17 +5,32 @@
 @inject SignOutSessionStateManager SignOutManager
 
 <AuthorizeView>
+
     <Authorized>
-        <a href="authentication/profile">Здорово, @context.User.Identity?.Name!</a>
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Выход</button>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="authentication/profile">Здорово, @context.User.Identity?.Name!</a>
+            </div>
+            <div class="col-md-2">
+                <RadzenButton Shade="Shade.Dark" Click=@BeginSignOut Text="Выход" ButtonStyle="ButtonStyle.Light" />
+            </div>
+        </div>
     </Authorized>
+
     <NotAuthorized>
-        <a href="authentication/register">Зарегаться</a>
-        <a href="authentication/login">Залогиниться</a>
+        <div class="row">
+            <div class="col-md-4">
+                <RadzenLink Path="authentication/register" Text="Зарегаться" />
+            </div>
+            <div class="col-md-4">
+                <RadzenLink Path="authentication/login" Text="Залогиниться" />
+            </div>
+        </div>
     </NotAuthorized>
+
 </AuthorizeView>
 
-@code{
+@code {
     private async Task BeginSignOut(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();

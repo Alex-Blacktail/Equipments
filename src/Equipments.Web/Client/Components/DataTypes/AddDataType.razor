@@ -3,19 +3,19 @@
 @inject HttpClient httpClient
 
 @using Equipments.Domain;
-@using Equipments.Web.Shared;
+@using Equipments.Web.Client.Models;
 
-<PageTitle>Add DataType</PageTitle>
+<PageTitle>Добавить тип данных</PageTitle>
 <div class="col-md-12">
-    <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save DataType</RadzenAlert>
+    <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Невозможно сохранить</RadzenAlert>
     <RadzenTemplateForm TItem="DataTypeDto" Data="@dataTypeDto" Visible="@(dataTypeDto != null)" Submit="@FormSubmit">
         <div style="margin-bottom: 1rem" class="row">
             <div class="col-md-3">
                 <RadzenLabel Text="Name" Component="Name" style="width: 100%" />
             </div>
             <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@dataTypeDto.Name" Name="Name" />
-                <RadzenRequiredValidator Component="Name" Text="Name is required" />
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@dataTypeDto.Name" Name="Наименование" />
+                <RadzenRequiredValidator Component="Наименование" Text="Наименование обязательно!" />
             </div>
         </div>
         <div style="margin-bottom: 1rem" class="row">
@@ -23,8 +23,8 @@
                 <RadzenLabel Text="CodeName" Component="CodeName" style="width: 100%" />
             </div>
             <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@dataTypeDto.CodeName" Name="CodeName" />
-                <RadzenRequiredValidator Component="CodeName" Text="CodeName is required" />
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@dataTypeDto.CodeName" Name="Кодовое наименование" />
+                <RadzenRequiredValidator Component="Кодовое наименование" Text="Кодовое наименование обязательно!" />
             </div>
         </div>
         <div class="row">

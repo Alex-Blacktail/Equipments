@@ -1,0 +1,49 @@
+@page "/edit-measure-unit"
+
+@inject HttpClient httpClient
+
+@using Equipments.Web.Client.Models;
+
+<PageTitle>Редактировать единицу измерения</PageTitle>
+
+    <div class="col-md-12">
+    <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Невозможно сохранить</RadzenAlert>
+    <RadzenTemplateForm TItem="MeasureUnitUpdateViewModel" Data="@model" Visible="@(model != null)" Submit="@FormSubmit">
+            <div style="margin-bottom: 1rem" class="row">
+                <div class="col-md-3">
+                    <RadzenLabel Text="Name" Component="Name" style="width: 100%" />
+                </div>
+                <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.Name" Name="Name" />
+                <RadzenRequiredValidator Component="Name" Text="Необходимо наименование!" />
+                </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+                <div class="col-md-3">
+                    <RadzenLabel Text="CodeName" Component="CodeName" style="width: 100%" />
+                </div>
+                <div class="col-md-9">
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.ShortName" Name="CodeName" />
+                <RadzenRequiredValidator Component="CodeName" Text="Необходимо краткое наименование наименование!" />
+                </div>
+            </div>
+        <div style="margin-bottom: 1rem" class="row">
+            <div class="col-md-3">
+                <RadzenLabel Text="Тип данных" style="width: 100%" />
+            </div>
+            <div class="col-md-9">
+                <RadzenDropDown Data="@model.DataTypes" TextProperty="Name" ValueProperty="Id"
+                                Placeholder="Выберите тип данных" style="display: block; width: 100%"
+                                @bind-Value="@model.SelectedDataTypeId"
+                                Name="SelectedDataTypeId" Count=@dataTypesCount />
+            </div>
+        </div>
+            <div class="row">
+                <div class="col d-flex justify-content-end" style="margin-top: 1rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Сохранить" Style="margin-right: 0.5rem" Variant="Variant.Flat"/>
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Отмена" Variant="Variant.Flat" Click="@CancelButtonClick"  />
+                </div>
+            </div>
+        </RadzenTemplateForm>
+    </div>
+

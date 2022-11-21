@@ -1,14 +1,14 @@
 using Radzen;
-using Equipments.Domain;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using System.Net.Http.Json;
 using Equipments.Web.Client.Models;
+using Equipments.Domain;
 
-namespace Equipments.Web.Client.Components.DataTypes
+namespace Equipments.Web.Client.Components.MeasureUnits
 {
-    public partial class EditDataType
+    public partial class EditMeasureUnit
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -26,23 +26,37 @@ namespace Equipments.Web.Client.Components.DataTypes
         [Parameter]
         public int Id { get; set; }
 
+        private MeasureUnitUpdateViewModel model = new();
+
+        private bool errorVisible;
+        private int dataTypesCount;
+
         protected override async Task OnInitializedAsync()
         {
-            var dataType = await httpClient.GetFromJsonAsync<DataType>(Routing.DataTypes + Id);
+            var item = await httpClient.GetFromJsonAsync<MeasureUnitUpdateViewModel>(Routing.MeasureUnits + "for-update/" + Id);
 
-            dataTypeDto.Name = dataType.Name;
-            dataTypeDto.CodeName = dataType.CodeName;
+            model.Name = item.Name;
+            model.ShortName = item.ShortName;
+            model.DataTypes = item.DataTypes;
+            model.SelectedDataTypeId = item.SelectedDataTypeId;
+
+            dataTypesCount = model.DataTypes.Count();
         }
-
-        private DataTypeDto dataTypeDto = new();
-        private bool errorVisible;
 
         private async Task FormSubmit()
         {
             try
             {
-                await httpClient.PutAsJsonAsync(Routing.DataTypes + Id, dataTypeDto);
-                DialogService.Close(dataTypeDto);
+                var item = new MeasureUnitUpdateDto 
+                { 
+                    Id = Id,
+                    Name = model.Name,
+                    ShortName = model.ShortName,
+                    DataTypeId = model.SelectedDataTypeId
+                };
+
+                await httpClient.PutAsJsonAsync(Routing.MeasureUnits + Id, item);
+                DialogService.Close(model);
             }
             catch (Exception ex)
             {

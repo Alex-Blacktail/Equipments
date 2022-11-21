@@ -5,12 +5,12 @@ using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Equipments.Domain;
-using Equipments.Web.Client.Components.DataTypes;
+using Equipments.Web.Client.Models;
+using Equipments.Web.Client.Components.MeasureUnits;
 
 namespace Equipments.Web.Client.Pages
 {
-    public partial class DataTypes
+    public partial class MeasureUnits
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -25,17 +25,17 @@ namespace Equipments.Web.Client.Pages
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-        private IEnumerable<DataType> dataTypes;
+        private IEnumerable<MeasureUnitDto> list;
 
-        private RadzenDataGrid<DataType> grid;
+        private RadzenDataGrid<MeasureUnitDto> grid;
         private int count;
 
         private async Task GridLoadData(LoadDataArgs args)
         {
             try
             {
-                dataTypes = await httpClient.GetFromJsonAsync<DataType[]>(Routing.DataTypes);        
-                count = dataTypes.Count();
+                list = await httpClient.GetFromJsonAsync<MeasureUnitDto[]>(Routing.MeasureUnits);        
+                count = list.Count();
             }
             catch (AccessTokenNotAvailableException exception)
             {
@@ -43,29 +43,29 @@ namespace Equipments.Web.Client.Pages
             }
             catch (Exception ex)
             {
-                NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error, Summary = $"Ошибка", Detail = $"Невозможно удалить запись" });
+                NotificationService.Notify(new NotificationMessage(){ Severity = NotificationSeverity.Error, Summary = $"Ошибка", Detail = $"Невозможно загрузить данные" });
             }
         }
 
         private async Task AddButtonClick(MouseEventArgs args)
         {
-            await DialogService.OpenAsync<AddDataType>("Добавить тип данных", null);
+            await DialogService.OpenAsync<AddMeasureUnit>("Добавить", null);
             await grid.Reload();
         }
 
-        private async Task EditRow(DataType args)
+        private async Task EditRow(MeasureUnitDto args)
         {
-            await DialogService.OpenAsync<EditDataType>("Редактировать тип данных", new Dictionary<string, object> { {"id", args.Id} });
+            await DialogService.OpenAsync<EditMeasureUnit>("Редактировать", new Dictionary<string, object> { {"id", args.Id} });
             await grid.Reload();
         }
 
-        private async Task GridDeleteButtonClick(MouseEventArgs args, DataType dataType)
+        private async Task GridDeleteButtonClick(MouseEventArgs args, MeasureUnitDto model)
         {
             try
             {
-                if (await DialogService.Confirm("Вы действительно хотите удалить выбранную запись?") == true)
+                if (await DialogService.Confirm("Вы уверены, что хотите удалить данную запись?") == true)
                 {
-                    var deleteResult = await httpClient.DeleteAsync(Routing.DataTypes + dataType.Id);
+                    var deleteResult = await httpClient.DeleteAsync(Routing.MeasureUnits + model.Id);
                     if (deleteResult != null)
                     {
                         await grid.Reload();

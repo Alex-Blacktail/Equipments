@@ -26,9 +26,12 @@
     </RadzenBody>
 
     <RadzenSidebar Expanded="@sidebarExpanded">
-        <RadzenPanelMenu style="height: 100%">
-            <RadzenPanelMenuItem Text="Домой" Path="/" />
-            <RadzenPanelMenuItem Text="Типы данных" Path="/data-types" />
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text="Основное" Icon="home" Path="/"/>
+            <RadzenPanelMenuItem Text="Справочник" Icon="save">
+                <RadzenPanelMenuItem Text="Типы данных" Path="/data-types" Icon="line_weight" />
+                <RadzenPanelMenuItem Text="Единицы измерения" Path="/measure-units" Icon="line_weight" />
+            </RadzenPanelMenuItem>
         </RadzenPanelMenu>
     </RadzenSidebar>
 
