@@ -1,6 +1,6 @@
 ﻿using Equipments.Domain;
 using Equipments.Infrastructure;
-using Equipments.Web.Shared;
+using Equipments.Web.Client.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,17 +23,20 @@ namespace Equipments.Web.Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<DataType> GetDataType(int id)
+        public async Task<ActionResult<DataType>> GetDataType(int id)
         {
             var item = await _context.DataTypes
                 .AsNoTracking()
                 .FirstOrDefaultAsync(i => i.Id == id);
 
-            return item;
+            if(item == null) 
+                return NotFound();
+
+            return Ok(item);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDataType(DataTypeDto dataTypeDto)
+        public async Task<ActionResult> AddDataType(DataTypeDto dataTypeDto)
         {
             var dataType = new DataType
             {
@@ -47,7 +50,7 @@ namespace Equipments.Web.Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDataType(int id, DataTypeDto item)
+        public async Task<ActionResult> PutDataType(int id, DataTypeDto item)
         {
             var dataType = await _context.DataTypes.FirstOrDefaultAsync(i => i.Id == id);
 
@@ -67,7 +70,7 @@ namespace Equipments.Web.Server.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDataType(int id)
+        public async Task<ActionResult> DeleteDataType(int id)
         {
             var item = await _context.DataTypes.FirstOrDefaultAsync(i => i.Id == id);
 
