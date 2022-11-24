@@ -9,7 +9,7 @@
     <Authorized>
         <div class="row">
             <div class="col-md-6">
-                <a href="authentication/profile">Здорово, @context.User.Identity?.Name!</a>
+                <a href="authentication/profile">Здравствуйте, @context.User.Identity?.Name!</a>
             </div>
             <div class="col-md-2">
                 <RadzenButton Shade="Shade.Dark" Click=@BeginSignOut Text="Выход" ButtonStyle="ButtonStyle.Light" />
@@ -20,10 +20,10 @@
     <NotAuthorized>
         <div class="row">
             <div class="col-md-4">
-                <RadzenLink Path="authentication/register" Text="Зарегаться" />
+                <RadzenLink Path="authentication/register" Text="Регистрация" />
             </div>
             <div class="col-md-4">
-                <RadzenLink Path="authentication/login" Text="Залогиниться" />
+                <RadzenLink Path="authentication/login" Text="Вход" />
             </div>
         </div>
     </NotAuthorized>

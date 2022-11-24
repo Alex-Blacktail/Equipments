@@ -1,4 +1,5 @@
-﻿using Equipments.Domain;
+﻿using System.Security.Claims;
+using Equipments.Domain;
 using Equipments.Infrastructure;
 using Equipments.Web.Client.Models;
 using Microsoft.AspNetCore.Mvc;

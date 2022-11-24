@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 var securityConnectionString = builder.Configuration.GetConnectionString("Security");
 var equipmentConnectionString = builder.Configuration.GetConnectionString("Equipments");
 
-builder.Services.AddDbContext<EquipmentsDbContext>(options => options.UseSqlServer(equipmentConnectionString));
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(securityConnectionString));
+builder.Services.AddDbContext<EquipmentsDbContext>(options => options.UseSqlServer(securityConnectionString));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(equipmentConnectionString));
 
 builder.Services
     .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
