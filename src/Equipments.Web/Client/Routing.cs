@@ -11,5 +11,8 @@
         public const string EquipmentTypes = "EquipmentTypes/";
         public const string InspectionTypes = "InspectionTypes/";
 
+
+        public const string ComponentTypeProperties = "ComponentTypeProperties/";
+
     }
 }

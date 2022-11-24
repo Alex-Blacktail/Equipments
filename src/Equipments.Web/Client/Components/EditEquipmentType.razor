@@ -15,6 +15,8 @@
                 <div class="col-md-9">
                 <RadzenTextBox style="display: block; width: 100%" @bind-Value="@typeDto.Name" Name="Наименование" />
                 <RadzenRequiredValidator Component="Наименование" Text="Необходимо наименование!" />
+                <RadzenLengthValidator Component="Наименование" Min="5" Max="50" Text="Поле должно содержать от 5 до 50 символов!" />
+                <RadzenRegexValidator Component="Наименование" Pattern="^[а-яА-ЯёЁ\s]+$" Text="Только русские символы!" />
                 </div>
             </div>
             <div class="row">

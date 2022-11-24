@@ -17,6 +17,8 @@
             <div class="col-md-9">
                 <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.Name" Name="Наименование" />
                 <RadzenRequiredValidator Component="Наименование" Text="Необходимо наименование!" />
+                <RadzenLengthValidator Component="Наименование" Min="2" Max="20" Text="Поле должно содержать от 2 до 20 символов!" />
+                <RadzenRegexValidator Component="Наименование" Pattern="^[а-яА-ЯёЁ\s]+$" Text="Только русские символы!" />
             </div>
         </div>
         <div style="margin-bottom: 1rem" class="row">
@@ -26,6 +28,8 @@
             <div class="col-md-9">
                 <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.ShortName" Name="Краткое наименование" />
                 <RadzenRequiredValidator Component="Краткое наименование" Text="Необходимо краткое наименование!" />
+                <RadzenLengthValidator Component="Краткое наименование" Min="2" Max="10" Text="Поле должно содержать от 2 до 10 символов!" />
+                <RadzenRegexValidator Component="Краткое наименование" Pattern="^[а-яА-ЯёЁ\s]+$" Text="Только русские символы!" />
             </div>
         </div>
         <div style="margin-bottom: 1rem" class="row">

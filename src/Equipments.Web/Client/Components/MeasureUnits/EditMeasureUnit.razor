@@ -11,20 +11,24 @@
     <RadzenTemplateForm TItem="MeasureUnitUpdateViewModel" Data="@model" Visible="@(model != null)" Submit="@FormSubmit">
             <div style="margin-bottom: 1rem" class="row">
                 <div class="col-md-3">
-                    <RadzenLabel Text="Name" Component="Name" style="width: 100%" />
+                <RadzenLabel Text="Наименование" Component="Name" style="width: 100%" />
                 </div>
                 <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.Name" Name="Name" />
-                <RadzenRequiredValidator Component="Name" Text="Необходимо наименование!" />
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.Name" Name="Наименование" />
+                <RadzenRequiredValidator Component="Наименование" Text="Необходимо наименование!" />
+                <RadzenLengthValidator Component="Наименование" Min="2" Max="20" Text="Поле должно содержать от 2 до 20 символов!" />
+                <RadzenRegexValidator Component="Наименование" Pattern="^[а-яА-ЯёЁ\s]+$" Text="Только русские символы!" />
                 </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
                 <div class="col-md-3">
-                    <RadzenLabel Text="CodeName" Component="CodeName" style="width: 100%" />
+                <RadzenLabel Text="Краткое наименовани" Component="CodeName" style="width: 100%" />
                 </div>
                 <div class="col-md-9">
-                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.ShortName" Name="CodeName" />
-                <RadzenRequiredValidator Component="CodeName" Text="Необходимо краткое наименование наименование!" />
+                <RadzenTextBox style="display: block; width: 100%" @bind-Value="@model.ShortName" Name="Краткое наименование" />
+                <RadzenRequiredValidator Component="Краткое наименование" Text="Необходимо краткое наименование наименование!" />
+                <RadzenLengthValidator Component="Краткое наименование" Min="2" Max="10" Text="Поле должно содержать от 2 до 10 символов!" />
+                <RadzenRegexValidator Component="Краткое наименование" Pattern="^[а-яА-ЯёЁ\s]+$" Text="Только русские символы!" />
                 </div>
             </div>
         <div style="margin-bottom: 1rem" class="row">

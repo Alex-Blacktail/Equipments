@@ -10,20 +10,24 @@
     <RadzenTemplateForm TItem="DataTypeDto" Data="@dataTypeDto" Visible="@(dataTypeDto != null)" Submit="@FormSubmit">
             <div style="margin-bottom: 1rem" class="row">
                 <div class="col-md-3">
-                    <RadzenLabel Text="Name" Component="Name" style="width: 100%" />
+                <RadzenLabel Text="Наименование" Component="Наименование" style="width: 100%" />
                 </div>
                 <div class="col-md-9">
                 <RadzenTextBox style="display: block; width: 100%" @bind-Value="@dataTypeDto.Name" Name="Наименование" />
                 <RadzenRequiredValidator Component="Наименование" Text="Необходимо наименование!" />
+                <RadzenLengthValidator Component="Наименование" Min="3" Max="20" Text="Поле должно содержать от 3 до 20 символов!" />
+                <RadzenRegexValidator Component="Наименование" Pattern="^[а-яА-ЯёЁ\s]+$" Text="Только русские символы!" />
                 </div>
             </div>
             <div style="margin-bottom: 1rem" class="row">
                 <div class="col-md-3">
-                    <RadzenLabel Text="CodeName" Component="CodeName" style="width: 100%" />
+                <RadzenLabel Text="Кодовое наименование" Component="Кодовое наименование" style="width: 100%" />
                 </div>
                 <div class="col-md-9">
                 <RadzenTextBox style="display: block; width: 100%" @bind-Value="@dataTypeDto.CodeName" Name="Кодовое наименование" />
                 <RadzenRequiredValidator Component="Кодовое наименование" Text="Необходимо кодовое наименование!" />
+                <RadzenLengthValidator Component="Кодовое наименование" Min="3" Max="15" Text="Поле должно содержать от 3 до 15 символов!" />
+                <RadzenRegexValidator Component="Кодовое наименование" Pattern="^[a-zA-Z\s]+$" Text="Только латинские буквы!" />
                 </div>
             </div>
             <div class="row">

@@ -1,0 +1,56 @@
+@page "/component-type-properties"
+@inject HttpClient httpClient
+
+@using Equipments.Web.Client.Models
+@using Equipments.Web.Client.Models.Components
+
+<PageTitle>Единицы измерения</PageTitle>
+
+<div class="row" style="margin-bottom: 1rem">
+    <div class="col-12 col-md-6">
+        <RadzenText Text="Единицы измерения" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+    </div>
+    <div class="col-12 col-md-6 justify-content-start justify-content-md-end" style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem">
+    <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Добавить" Click="@AddButtonClick" Variant="Variant.Flat" />
+    </div>
+</div>
+
+<div class="col-md-6 p-3">
+    <RadzenCard>
+        <RadzenText TextStyle="TextStyle.Subtitle2" TagName="TagName.H3">Bind Value to model property</RadzenText>
+        <RadzenDropDown 
+            AllowClear="true" AllowFiltering="true" 
+            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+            Data=@viewModel.ComponentTypes @bind-Value=@viewModel.ComponentTypeId
+            TextProperty="ProductName" ValueProperty="Id" 
+            Change=@(args => RefreshGrid(args)) Class="w-100" />
+    </RadzenCard>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <RadzenDataGrid @ref="grid" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true"
+                        Data="@viewModel.ComponentTypeProperties" Count=count LoadData=@GridLoadData TItem="ComponentTypePropertyViewModel" RowSelect="@EditRow">
+
+            <Columns>
+                <RadzenDataGridColumn TItem="ComponentTypePropertyViewModel" Property="PropertyName" Title="Наименование">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ComponentTypePropertyViewModel" Property="MeasureUnitName" Title="Кртакое Наименование">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ComponentTypePropertyViewModel" Property="DataTypeName" Title="Тип данных">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="ComponentTypePropertyViewModel" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="model">
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat" Click=@(args => GridDeleteButtonClick(args, model)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+    </div>
+</div>
+
+@code{
+
+}
